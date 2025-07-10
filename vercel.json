@@ -9,7 +9,7 @@
      "routes": [
           {
                "src": "/api/(.*)",
-               "dest": "/api/gemini.js"
+               "dest": "/api/server.js"
           }
      ]
 }
