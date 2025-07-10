@@ -1,0 +1,26 @@
+{
+     "name": "Wisnu Yumna Yudhanta",
+     "title": "Fullstack Developer",
+     "education": {
+          "degree": "D4 Teknik Informatika",
+          "school": "Politeknik Purbaya",
+          "year": "2019–2023"
+     },
+     "projects": [
+          {
+               "title": "Absensi Karyawan",
+               "desc": "Aplikasi absensi berbasis autentikasi wajah dan GPS.",
+               "tech": ["Flutter", "Laravel", "Face Detection"]
+          },
+          {
+               "title": "Movie Explorer",
+               "desc": "Web movie info menggunakan OMDb API.",
+               "tech": ["Laravel", "Tailwind", "API"]
+          }
+     ],
+     "skills": ["PHP", "Laravel", "Angular", "Flutter", "Firebase", "Figma"],
+     "experiences": [
+          { "role": "Intern Developer", "company": "Central AI", "years": 1 },
+          { "role": "Software Engineer", "company": "Doktortj", "years": 2 }
+     ]
+}
