@@ -1,17 +1,18 @@
 {
+     "name": "portf-backend-gemini",
+     "version": "1.0.0",
+     "main": "api/server.js",
+     "scripts": {
+          "dev": "node api/server.js",
+          "start": "node api/server.js"
+     },
      "dependencies": {
           "axios": "^1.10.0",
           "body-parser": "^2.2.0",
           "cors": "^2.8.5",
           "dotenv": "^17.1.0",
-          "express": "^5.1.0"
-     },
-     "name": "portf-backend-gemini",
-     "version": "1.0.0",
-     "main": "index.js",
-     "scripts": {
-          "start": "node server.js",
-          "test": "echo \"Error: no test specified\" && exit 1"
+          "express": "^5.1.0",
+          "serverless-http": "3.2.0"
      },
      "keywords": [],
      "author": "",

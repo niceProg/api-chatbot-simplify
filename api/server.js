@@ -1,20 +1,17 @@
 const express = require("express");
+const serverless = require("serverless-http"); // <== penting
 const cors = require("cors");
-const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
+require("dotenv").config();
 
-dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 5555;
-
+const PORT = process.env.PORT
 app.use(cors());
 app.use(bodyParser.json());
 
-const geminiRoute = require("./routes/gemini");
+const geminiRoute = require("../routes/gemini");
 app.use("/api", geminiRoute);
 
-app.get("/", (req, res) => res.send("Gemini API running..."));
-
-app.listen(PORT, () => {
+module.exports = serverless(app.listen(PORT, () => {
      console.log(`Server running on port ${PORT}`);
-});
+}));
