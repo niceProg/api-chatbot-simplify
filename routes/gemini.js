@@ -1,51 +1,41 @@
 const express = require("express");
-const router = express.Router();
 const axios = require("axios");
-const fs = require("fs");
+const router = express.Router();
+
+// ✅ Load dotenv hanya di lokal
 if (process.env.NODE_ENV !== "production") {
      require("dotenv").config();
 }
 
+// ✅ Load profile langsung via require (lebih cepat & aman untuk Vercel)
+const profile = require("../my-profile.json");
+
 router.post("/chat", async (req, res) => {
-     console.log("Masuk route /chat");
+     console.log("✅ [POST] /chat called");
 
      const userPromptRaw = req.body?.prompt;
      if (!userPromptRaw || typeof userPromptRaw !== "string") {
           return res.status(400).json({ error: "Prompt tidak valid atau kosong." });
      }
-     console.log("Prompt:", userPromptRaw);
-
-     const apiKey = process.env.GEMINI_API_KEY;
-     console.log("API Key slice:", apiKey?.slice(0, 8));
 
      const userPrompt = userPromptRaw.toLowerCase();
-
-     const profile = JSON.parse(fs.readFileSync("my-profile.json", "utf-8"));
+     console.log("📝 Prompt:", userPrompt);
 
      // ========== 1. CUSTOM RESPONSE RULES ==========
-     // Salam
      const greetings = ["assalamu'alaikum", "assalamualaikum", "salam", "assalamu alaikum"];
-     const greetingsResponse = "Wa'alaikumsalam! Apa kabar? Senang bisa bantu kamu 😊";
-
-     // Sapaan umum
      const casualGreetings = ["hai", "halo", "hi", "hello"];
-     const casualResponse = "Halo juga! Ada yang bisa aku bantu seputar teknologi atau pengalamanku? 😊";
-
-     // Tanya pengalaman
      const experienceKeywords = ["berapa pengalaman", "berapa tahun pengalaman", "sudah berapa lama"];
-     const experiences = profile.experiences || []; // tambahkan jika belum ada
+     const experiences = profile.experiences || [];
 
-     // Auto reply jika cocok
      if (greetings.some((s) => userPrompt.includes(s))) {
-          return res.json({ reply: greetingsResponse });
+          return res.json({ reply: "Wa'alaikumsalam! Apa kabar? Senang bisa bantu kamu 😊" });
      }
 
      if (casualGreetings.some((s) => userPrompt.includes(s))) {
-          return res.json({ reply: casualResponse });
+          return res.json({ reply: "Halo juga! Ada yang bisa aku bantu seputar teknologi atau pengalamanku? 😊" });
      }
 
      if (experienceKeywords.some((k) => userPrompt.includes(k))) {
-          // Kalkulasi pengalaman total jika tersedia
           const totalYears = experiences.reduce((acc, exp) => acc + (exp.years || 0), 0);
           const reply =
                totalYears > 0
@@ -67,18 +57,21 @@ Berikut data tentang kamu:
 Beberapa proyekmu:
 ${profile.projects.map((p) => `• ${p.title}: ${p.desc} (Tech: ${p.tech.join(", ")})`).join("\n")}
 
-Pertanyaan dari seseorang: "${req.body.prompt}"
+Pertanyaan dari seseorang: "${userPromptRaw}"
 Jawablah sebagai dirimu sendiri (Wisnu), tidak perlu menyebut "Wisnu" dalam orang ketiga.
 `;
 
      try {
-          const response = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
-               contents: [{ parts: [{ text: context }] }],
-          });
+          const geminiRes = await axios.post(
+               `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+               { contents: [{ parts: [{ text: context }] }] },
+               { timeout: 8000 } // ⏱️ Batas 8 detik biar gak timeout
+          );
 
-          const reply = response.data.candidates?.[0]?.content?.parts?.[0]?.text || "(no response)";
+          const reply = geminiRes.data?.candidates?.[0]?.content?.parts?.[0]?.text || "(no response)";
           res.json({ reply });
      } catch (err) {
+          console.error("❌ Error Gemini API:", err.message);
           res.status(500).json({
                error: "Gagal mengambil respons Gemini",
                detail: err.response?.data || err.message,
