@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const fs = require("fs");
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+     require("dotenv").config();
+}
 
 router.post("/chat", async (req, res) => {
      const userPromptRaw = req.body?.prompt;
@@ -66,6 +68,7 @@ Jawablah sebagai dirimu sendiri (Wisnu), tidak perlu menyebut "Wisnu" dalam oran
           const response = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
                contents: [{ parts: [{ text: context }] }],
           });
+          console.log("✅ Gemini API Key (partial):", process.env.GEMINI_API_KEY?.slice(0, 8) + "...");
 
           const reply = response.data.candidates?.[0]?.content?.parts?.[0]?.text || "(no response)";
           res.json({ reply });
