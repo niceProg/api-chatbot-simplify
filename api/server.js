@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const geminiRoute = require("../routes/gemini");
-app.use("/api", geminiRoute);
+app.use("/", geminiRoute);
 
 module.exports = serverless(app);
 
