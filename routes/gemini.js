@@ -1,80 +1,77 @@
 const express = require("express");
-const axios = require("axios");
 const router = express.Router();
+const axios = require("axios");
 
-// ✅ Load dotenv hanya di lokal
+// Load .env hanya jika bukan di production
 if (process.env.NODE_ENV !== "production") {
      require("dotenv").config();
 }
 
-// ✅ Load profile langsung via require (lebih cepat & aman untuk Vercel)
-const profile = require("../my-profile.json");
+// Lebih aman dan cepat untuk serverless
+let profile;
+try {
+     profile = require("../my-profile.json");
+} catch (err) {
+     console.error("❌ Gagal load my-profile.json:", err.message);
+     profile = {};
+}
 
 router.post("/chat", async (req, res) => {
      console.log("✅ [POST] /chat called");
 
-     const userPromptRaw = req.body?.prompt;
-     if (!userPromptRaw || typeof userPromptRaw !== "string") {
-          return res.status(400).json({ error: "Prompt tidak valid atau kosong." });
+     const promptRaw = req.body?.prompt;
+     if (!promptRaw || typeof promptRaw !== "string") {
+          return res.status(400).json({ error: "Prompt tidak valid." });
      }
 
-     const userPrompt = userPromptRaw.toLowerCase();
-     console.log("📝 Prompt:", userPrompt);
+     const prompt = promptRaw.toLowerCase();
 
-     // ========== 1. CUSTOM RESPONSE RULES ==========
-     const greetings = ["assalamu'alaikum", "assalamualaikum", "salam", "assalamu alaikum"];
-     const casualGreetings = ["hai", "halo", "hi", "hello"];
-     const experienceKeywords = ["berapa pengalaman", "berapa tahun pengalaman", "sudah berapa lama"];
-     const experiences = profile.experiences || [];
-
-     if (greetings.some((s) => userPrompt.includes(s))) {
-          return res.json({ reply: "Wa'alaikumsalam! Apa kabar? Senang bisa bantu kamu 😊" });
+     // Auto responses
+     if (["hai", "halo", "hi", "hello"].some((w) => prompt.includes(w))) {
+          return res.json({ reply: "Halo juga! Ada yang bisa aku bantu?" });
      }
 
-     if (casualGreetings.some((s) => userPrompt.includes(s))) {
-          return res.json({ reply: "Halo juga! Ada yang bisa aku bantu seputar teknologi atau pengalamanku? 😊" });
+     if (["assalamu'alaikum", "assalamualaikum", "assalamu alaikum"].some((w) => prompt.includes(w))) {
+          return res.json({ reply: "Wa'alaikumsalam! Semoga harimu menyenangkan 😊" });
      }
 
-     if (experienceKeywords.some((k) => userPrompt.includes(k))) {
-          const totalYears = experiences.reduce((acc, exp) => acc + (exp.years || 0), 0);
-          const reply =
-               totalYears > 0
-                    ? `Kalau ditotal, aku punya sekitar ${totalYears} tahun pengalaman di bidang yang relevan.`
-                    : "Pengalaman kerjaku belum dicantumkan detail di database, tapi aku aktif sejak kuliah dan banyak ikut proyek pribadi maupun tim.";
-          return res.json({ reply });
+     // Check Gemini API Key
+     const apiKey = process.env.GEMINI_API_KEY;
+     if (!apiKey) {
+          console.error("❌ API Key kosong");
+          return res.status(500).json({ error: "API Key belum dikonfigurasi." });
      }
 
-     // ========== 2. CONTEXT ke GEMINI ==========
      const context = `
-Kamu adalah Wisnu Yumna Yudhanta, seorang Fullstack Developer. Ketika seseorang bertanya, jawab dengan gaya profesional, percaya diri, dan personal—seolah kamu sedang menjawab langsung sebagai Wisnu.
+Kamu adalah Wisnu Yumna Yudhanta, seorang Fullstack Developer. Jawab semua pertanyaan sebagai dirimu sendiri, profesional dan personal.
 
-Berikut data tentang kamu:
+Profil:
 - Nama: ${profile.name}
 - Title: ${profile.title}
-- Pendidikan: ${profile.education.degree} di ${profile.education.school} (${profile.education.year})
-- Keahlian: ${profile.skills.join(", ")}
+- Pendidikan: ${profile.education?.degree} di ${profile.education?.school} (${profile.education?.year})
+- Skills: ${profile.skills?.join(", ")}
 
-Beberapa proyekmu:
-${profile.projects.map((p) => `• ${p.title}: ${p.desc} (Tech: ${p.tech.join(", ")})`).join("\n")}
-
-Pertanyaan dari seseorang: "${userPromptRaw}"
-Jawablah sebagai dirimu sendiri (Wisnu), tidak perlu menyebut "Wisnu" dalam orang ketiga.
+Pertanyaan: "${promptRaw}"
 `;
 
      try {
           const geminiRes = await axios.post(
-               `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
-               { contents: [{ parts: [{ text: context }] }] },
-               { timeout: 8000 } // ⏱️ Batas 8 detik biar gak timeout
+               `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+               {
+                    contents: [{ parts: [{ text: context }] }],
+               },
+               {
+                    timeout: 6000, // 🛡️ Auto fail in 6s
+               }
           );
 
           const reply = geminiRes.data?.candidates?.[0]?.content?.parts?.[0]?.text || "(no response)";
-          res.json({ reply });
+          return res.json({ reply });
      } catch (err) {
-          console.error("❌ Error Gemini API:", err.message);
-          res.status(500).json({
-               error: "Gagal mengambil respons Gemini",
-               detail: err.response?.data || err.message,
+          console.error("❌ Gemini API error:", err.message);
+          return res.status(500).json({
+               error: "Gagal terhubung ke Gemini API",
+               detail: err.message,
           });
      }
 });
