@@ -2,16 +2,20 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const fs = require("fs");
-require("dotenv").config();
-// if (process.env.NODE_ENV !== "production") {
-//      require("dotenv").config();
-// }
+// require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+     require("dotenv").config();
+}
 
 router.post("/chat", async (req, res) => {
+     const start = Date.now();
+     console.log("📥 [POST] /chat called at", new Date().toISOString());
+
      const userPromptRaw = req.body?.prompt;
      if (!userPromptRaw || typeof userPromptRaw !== "string") {
           return res.status(400).json({ error: "Prompt tidak valid atau kosong." });
      }
+
      const userPrompt = userPromptRaw.toLowerCase();
 
      const profile = JSON.parse(fs.readFileSync("my-profile.json", "utf-8"));
@@ -69,10 +73,24 @@ Jawablah sebagai dirimu sendiri (Wisnu), tidak perlu menyebut "Wisnu" dalam oran
           const response = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`, {
                contents: [{ parts: [{ text: context }] }],
           });
+          console.log("📥 [POST] /chat handler invoked");
 
           const reply = response.data.candidates?.[0]?.content?.parts?.[0]?.text || "(no response)";
+          const duration = Date.now() - start;
+          console.log(`✅ Gemini API replied in ${duration}ms`);
           res.json({ reply });
      } catch (err) {
+          const duration = Date.now() - start;
+
+          // 🛑 Deteksi error 504 atau TIMEOUT
+          if (err.code === "ECONNABORTED") {
+               console.error(`⏱️ Timeout: Gemini API tidak merespon dalam batas waktu (${duration}ms)`);
+          } else if (err.response?.status === 504) {
+               console.error("🚨 Gateway Timeout 504 dari Gemini");
+          } else {
+               console.error("❌ Error dari Gemini API:", err.message);
+          }
+
           res.status(500).json({
                error: "Gagal mengambil respons Gemini",
                detail: err.response?.data || err.message,
