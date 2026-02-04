@@ -1,20 +1,23 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
-const bodyParser = require("body-parser");
+require("dotenv").config();
 
-dotenv.config();
-const app = express();
-const PORT = process.env.PORT || 5555;
+const createApp = require("./app");
 
-app.use(cors());
-app.use(bodyParser.json());
+const app = createApp();
+const PORT = Number(process.env.PORT) || 5555;
 
-const geminiRoute = require("./routes/gemini");
-app.use("/api", geminiRoute);
-
-app.get("/", (req, res) => res.send("Gemini API running..."));
-
-app.listen(PORT, () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
      console.log(`Server running on port ${PORT}`);
 });
+
+function shutdown(signal) {
+     console.log(`Received ${signal}. Shutting down gracefully...`);
+     server.close(() => process.exit(0));
+
+     setTimeout(() => {
+          console.error("Force shutdown after timeout.");
+          process.exit(1);
+     }, 10000).unref();
+}
+
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+process.on("SIGINT", () => shutdown("SIGINT"));

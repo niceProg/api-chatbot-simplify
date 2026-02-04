@@ -1,0 +1,16 @@
+services:
+  api-chatbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-chatbot-simplify
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      NODE_ENV: production
+      PORT: ${PORT:-5555}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    ports:
+      - "${PORT:-5555}:${PORT:-5555}"

@@ -1,26 +1,288 @@
 {
-     "name": "Wisnu Yumna Yudhanta",
-     "title": "Fullstack Developer",
-     "education": {
-          "degree": "D4 Teknik Informatika",
-          "school": "Politeknik Purbaya",
-          "year": "2019–2023"
-     },
-     "projects": [
-          {
-               "title": "Absensi Karyawan",
-               "desc": "Aplikasi absensi berbasis autentikasi wajah dan GPS.",
-               "tech": ["Flutter", "Laravel", "Face Detection"]
-          },
-          {
-               "title": "Movie Explorer",
-               "desc": "Web movie info menggunakan OMDb API.",
-               "tech": ["Laravel", "Tailwind", "API"]
-          }
-     ],
-     "skills": ["PHP", "Laravel", "Angular", "Flutter", "Firebase", "Figma"],
-     "experiences": [
-          { "role": "Intern Developer", "company": "Central AI", "years": 1 },
-          { "role": "Software Engineer", "company": "Doktortj", "years": 2 }
-     ]
+  "version": "1.0.0",
+  "last_updated": "2026-02-04",
+  "identity": {
+    "assistant_name": "Yumna Portfolio Assistant",
+    "owner_name": "Wisnu Yumna Yudhanta",
+    "owner_aliases": [
+      "Wisnu",
+      "Wisnu Yumna",
+      "Yumna",
+      "Yudhanta"
+    ],
+    "role": "Fullstack Developer",
+    "website": "https://yumnadev.documentme.my.id/",
+    "primary_language": "id",
+    "secondary_language": "en"
+  },
+  "chatbot_scope": {
+    "purpose": [
+      "Menjelaskan profil, skill, pengalaman, dan portofolio Wisnu",
+      "Membantu visitor memilih project yang relevan dengan kebutuhannya",
+      "Kualifikasi awal calon klien (budget, timeline, fitur inti)",
+      "Mengarahkan visitor ke channel kontak untuk diskusi lanjut"
+    ],
+    "out_of_scope": [
+      "Memberikan janji kontrak/harga final yang mengikat",
+      "Memberikan akses data pribadi, kredensial, atau informasi sensitif",
+      "Menyampaikan klaim yang tidak ada di data profil"
+    ]
+  },
+  "owner_profile": {
+    "summary": "Experienced Fullstack Developer with the ability to develop applications end-to-end, design engaging UI/UX, and adapt quickly in dynamic environments.",
+    "education": {
+      "degree": "Bachelor's Degree, Informatics Engineering",
+      "institution": "Politeknik Harapan Bersama",
+      "graduation_date": "2023-08-24"
+    },
+    "organizations": [
+      {
+        "name": "TEGAL DEV",
+        "period": "2024 - Present",
+        "highlights": [
+          "Organized community meetups and scheduled tech events",
+          "Hosted workshops and MC-ed tech talks on Discord"
+        ]
+      },
+      {
+        "name": "PLUGIN",
+        "period": "2019 - 2021",
+        "highlights": [
+          "Designed web layouts",
+          "Studied Linux distribution and partition management",
+          "Coordinated mini-project teams"
+        ]
+      }
+    ]
+  },
+  "services": [
+    "Fullstack web app development",
+    "Landing page and company profile website",
+    "UI/UX redesign and front-end implementation",
+    "Payment gateway integration (example: Midtrans)",
+    "Automation and data scraping workflows",
+    "Server setup and deployment (aaPanel, WHCP, cPanel, VPS)"
+  ],
+  "technical_skills": [
+    "Python",
+    "PHP",
+    "JavaScript",
+    "Laravel",
+    "Flask",
+    "Django",
+    "FastAPI",
+    "Flutter",
+    "MySQL",
+    "MongoDB",
+    "Redis",
+    "Tailwind CSS",
+    "Bootstrap 5",
+    "Git",
+    "CI/CD",
+    "Postman",
+    "TensorFlow",
+    "OpenCV",
+    "Face Recognition",
+    "Selenium",
+    "Linux Server Terminal",
+    "Figma"
+  ],
+  "soft_skills": [
+    "Analytical thinking",
+    "Problem solving",
+    "Communication",
+    "Team collaboration",
+    "Adaptability"
+  ],
+  "experience": [
+    {
+      "title": "Freelancer Based Projects Software Engineer",
+      "company": "Dragonfortune.ai Surabaya",
+      "period": "August 2025 - Present",
+      "focus": [
+        "Crypto data scraping automation",
+        "Server setup with WHCP and aaPanel",
+        "Docker-based shell scripting",
+        "XGBoost model experimentation and backtest tuning"
+      ]
+    },
+    {
+      "title": "Internship Fullstack Engineer",
+      "company": "DOKTORTJ DIGITAL INSTITUTE",
+      "period": "November 2024 - January 2025",
+      "focus": [
+        "Website development and CRUD features",
+        "Midtrans integration",
+        "Dashboard and UI redesign",
+        "Flutter slicing from Figma mockups",
+        "Tutor and event speaker contributions"
+      ]
+    },
+    {
+      "title": "Data Engineer",
+      "company": "Golkar DKI",
+      "period": "December 2023 - May 2024",
+      "focus": [
+        "Data entry operations",
+        "Python scraping and validation pipeline",
+        "VPS automation",
+        "Processed 25,000+ data entries in 2 weeks"
+      ]
+    },
+    {
+      "title": "Fullstack Developer",
+      "company": "PT Central Artificial Intelligence",
+      "period": "August 2022 - January 2024",
+      "focus": [
+        "Interactive dashboard development with Flask",
+        "REST API integration and testing",
+        "Figma mobile prototyping",
+        "Web page implementation based on route requirements"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Chatbot with RAG",
+      "year": "2025",
+      "stack": [
+        "Next.js",
+        "FastAPI",
+        "IBM Granite",
+        "Replicate API",
+        "Google OAuth"
+      ],
+      "url": "https://ibmskills.documentme.my.id/",
+      "summary": "AI chatbot with Retrieval Augmented Generation and responsive dashboard."
+    },
+    {
+      "name": "Web Movie Explorer",
+      "year": "2025",
+      "stack": [
+        "Laravel 5.8",
+        "OMDb API",
+        "Tailwind CSS"
+      ],
+      "url": "https://movie.documentme.my.id",
+      "summary": "Movie discovery platform by genre and year."
+    },
+    {
+      "name": "Rental PS Booking System",
+      "year": "2025",
+      "stack": [
+        "Laravel",
+        "Midtrans"
+      ],
+      "url": null,
+      "summary": "PlayStation rental app with online booking and payment integration."
+    },
+    {
+      "name": "SALUT DOKTORTJ Website",
+      "year": "2025",
+      "stack": [
+        "Laravel"
+      ],
+      "url": null,
+      "summary": "Educational service website for digitalization support."
+    },
+    {
+      "name": "Personal Blog",
+      "year": "2024",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "Sanity CMS"
+      ],
+      "url": "https://blog-yumna-155nrjch7-wisnu-yumna-yudhantas-projects.vercel.app",
+      "summary": "Personal blog with structured content management."
+    },
+    {
+      "name": "Duplicate Sentence and Document Detector",
+      "year": "2024",
+      "stack": [
+        "Django",
+        "Sastrawi"
+      ],
+      "url": null,
+      "summary": "Similarity detection app with automatic source references."
+    },
+    {
+      "name": "Employee Attendance Application",
+      "year": "2023",
+      "stack": [
+        "Face Recognition",
+        "GPS",
+        "Reporting Dashboard"
+      ],
+      "url": null,
+      "summary": "Digital attendance app with exportable reports."
+    }
+  ],
+  "certifications_highlight": [
+    {
+      "title": "Code Generation and Optimization Using IBM Granite",
+      "issuer": "Creadly",
+      "year": "2025"
+    },
+    {
+      "title": "Introduction to DevOps: Roadmap to DevOps Career",
+      "issuer": "Udemy",
+      "year": "2025"
+    },
+    {
+      "title": "DevOps Basics",
+      "issuer": "Dicoding",
+      "year": "2024"
+    }
+  ],
+  "contact": {
+    "whatsapp": "https://wa.me/6285600670534",
+    "github": "https://github.com/niceProg",
+    "linkedin": "https://www.linkedin.com/in/wisnu-yumna-yudhanta-143596199/",
+    "instagram": "https://www.instagram.com/yumna_rx"
+  },
+  "qualification_flow": {
+    "ask_in_order": [
+      "Kebutuhan utama project apa?",
+      "Deadline atau target launch kapan?",
+      "Estimasi budget range berapa?",
+      "Sudah punya referensi fitur/desain atau belum?",
+      "Mau mulai dari MVP dulu atau full scope?"
+    ],
+    "lead_capture_template": {
+      "client_name": "",
+      "project_type": "",
+      "core_features": [],
+      "timeline": "",
+      "budget_range": "",
+      "preferred_contact": ""
+    }
+  },
+  "response_guidelines": {
+    "tone": "friendly, concise, practical",
+    "do": [
+      "Gunakan bahasa Indonesia default kecuali user minta English",
+      "Rekomendasikan project paling relevan berdasarkan kebutuhan user",
+      "Akhiri dengan CTA jelas ke WhatsApp atau LinkedIn bila user siap lanjut"
+    ],
+    "dont": [
+      "Jangan mengarang pengalaman atau teknologi yang tidak ada di data",
+      "Jangan memberi kepastian harga final tanpa kualifikasi kebutuhan",
+      "Jangan membahas informasi sensitif yang tidak dipublikasikan"
+    ]
+  },
+  "sample_faq": [
+    {
+      "q": "Bisa buat website company profile?",
+      "a": "Bisa. Scope umum mencakup landing page, profil perusahaan, kontak, SEO basic, dan deployment."
+    },
+    {
+      "q": "Bisa integrasi payment gateway?",
+      "a": "Bisa. Contoh yang pernah dikerjakan: Midtrans integration pada sistem booking."
+    },
+    {
+      "q": "Tech stack yang sering dipakai apa?",
+      "a": "Umumnya Python/PHP/JavaScript dengan framework seperti Laravel, Flask, Django, FastAPI, serta front-end Tailwind/Bootstrap."
+    }
+  ]
 }
