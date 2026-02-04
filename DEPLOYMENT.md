@@ -8,16 +8,16 @@ cp .env.example .env
 
 Isi `GEMINI_API_KEY` di `.env`.
 
-## 2. Build image
+## 2. Setup pertama kali
 
 ```bash
-./scripts/docker-build.sh
+./docker.sh --setup
 ```
 
-## 3. Jalankan container
+## 3. Re-setup (rebuild + recreate)
 
 ```bash
-./scripts/docker-up.sh
+./docker.sh --resetup
 ```
 
 API tersedia di:
@@ -25,14 +25,7 @@ API tersedia di:
 - `GET /health`
 - `POST /api/chat`
 
-## 4. Stop container
-
+## 4. Bantuan command
 ```bash
-./scripts/docker-down.sh
-```
-
-## 5. Lihat logs realtime
-
-```bash
-./scripts/docker-logs.sh
+./docker.sh --help
 ```
