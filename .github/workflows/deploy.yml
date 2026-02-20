@@ -53,4 +53,21 @@ jobs:
 
             run_git fetch origin
             run_git reset --hard origin/main
-            ./docker.sh --resetup
+
+            run_resetup() {
+              if docker info >/dev/null 2>&1; then
+                ./docker.sh --resetup
+              elif [ "$CURRENT_USER" != "$REPO_OWNER" ] && command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null && sudo -n -u "$REPO_OWNER" docker info >/dev/null 2>&1; then
+                sudo -n -u "$REPO_OWNER" env DEPLOY_PATH="$DEPLOY_PATH" sh -c 'cd "$DEPLOY_PATH" && ./docker.sh --resetup'
+              elif command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null && sudo -n docker info >/dev/null 2>&1; then
+                sudo -n env DEPLOY_PATH="$DEPLOY_PATH" sh -c 'cd "$DEPLOY_PATH" && ./docker.sh --resetup'
+              else
+                echo "Tidak bisa akses Docker daemon (docker.sock)."
+                echo "Tambahkan SSH_USER ke group docker, atau beri sudo non-interaktif untuk docker."
+                id
+                ls -l /var/run/docker.sock || true
+                exit 1
+              fi
+            }
+
+            run_resetup
