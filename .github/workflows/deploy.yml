@@ -35,20 +35,22 @@ jobs:
               exit 1
             fi
             cd "$DEPLOY_PATH"
-            if [ ! -w "$DEPLOY_PATH/.git" ]; then
-              echo "Tidak ada izin tulis ke $DEPLOY_PATH/.git, mencoba perbaiki ownership..."
-              if command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
-                sudo chown -R "$(id -un):$(id -gn)" "$DEPLOY_PATH"
+            REPO_OWNER="$(stat -c '%U' "$DEPLOY_PATH/.git")"
+            CURRENT_USER="$(id -un)"
+            echo "Deploy user: $CURRENT_USER | Repo owner: $REPO_OWNER"
+
+            run_git() {
+              if [ "$CURRENT_USER" = "$REPO_OWNER" ]; then
+                git -c safe.directory="$DEPLOY_PATH" -C "$DEPLOY_PATH" "$@"
+              elif command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
+                sudo -n -u "$REPO_OWNER" git -c safe.directory="$DEPLOY_PATH" -C "$DEPLOY_PATH" "$@"
               else
-                echo "Gagal auto-fix: sudo non-interaktif tidak tersedia."
-                echo "Jalankan manual di server: sudo chown -R $(id -un):$(id -gn) \"$DEPLOY_PATH\""
-                ls -ld "$DEPLOY_PATH" "$DEPLOY_PATH/.git" || true
+                echo "User deploy tidak bisa menulis repo dan sudo non-interaktif tidak tersedia."
+                echo "Gunakan SSH_USER=$REPO_OWNER atau beri akses sudo -u $REPO_OWNER."
                 exit 1
               fi
-            fi
-            if ! git config --global --get-all safe.directory | grep -Fxq "$DEPLOY_PATH"; then
-              git config --global --add safe.directory "$DEPLOY_PATH"
-            fi
-            git fetch origin
-            git reset --hard origin/main
+            }
+
+            run_git fetch origin
+            run_git reset --hard origin/main
             ./docker.sh --resetup
