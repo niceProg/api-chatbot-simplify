@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "last_updated": "2026-02-04",
+  "last_updated": "2026-02-20",
   "identity": {
     "assistant_name": "Yumna Portfolio Assistant",
     "owner_name": "Wisnu Yumna Yudhanta",
@@ -71,7 +71,10 @@
     "Flask",
     "Django",
     "FastAPI",
+    "XGBoost",
+    "QuantConnect",
     "Flutter",
+    "Docker",
     "MySQL",
     "MongoDB",
     "Redis",
@@ -96,14 +99,20 @@
   ],
   "experience": [
     {
-      "title": "Freelancer Based Projects Software Engineer",
+      "title": "AI/ML Engineer (Crypto Analytics)",
       "company": "Dragonfortune.ai Surabaya",
       "period": "August 2025 - Present",
       "focus": [
-        "Crypto data scraping automation",
-        "Server setup with WHCP and aaPanel",
-        "Docker-based shell scripting",
-        "XGBoost model experimentation and backtest tuning"
+        "Crypto data scraping pipelines (Coinglass, CryptoQuant, Hyblock, TensorCharts)",
+        "Linux server provisioning with WHCP and aaPanel",
+        "End-to-end AI-powered trading platform delivery",
+        "Automated ingestion, scraping, cleaning, and feature pipelines",
+        "Docker automation with shell scripting",
+        "XGBoost signal modeling for financial time-series",
+        "Iterative XGBoost experimentation and backtest optimization",
+        "Python FastAPI services for training and inference",
+        "Laravel dashboard, user management, and strategy configuration",
+        "QuantConnect backtesting and Dockerized CI/CD deployment"
       ]
     },
     {
@@ -111,11 +120,10 @@
       "company": "DOKTORTJ DIGITAL INSTITUTE",
       "period": "November 2024 - January 2025",
       "focus": [
-        "Website development and CRUD features",
-        "Midtrans integration",
-        "Dashboard and UI redesign",
-        "Flutter slicing from Figma mockups",
-        "Tutor and event speaker contributions"
+        "Led end-to-end delivery of two business-facing websites and one customer-facing platform",
+        "Built secure platform architecture with RESTful APIs, MySQL design, and role-based access control",
+        "Aligned technical execution with business goals through close stakeholder and PM collaboration",
+        "Delivered projects on schedule with a focus on UX and operational efficiency"
       ]
     },
     {
@@ -123,10 +131,11 @@
       "company": "Golkar DKI",
       "period": "December 2023 - May 2024",
       "focus": [
-        "Data entry operations",
-        "Python scraping and validation pipeline",
-        "VPS automation",
-        "Processed 25,000+ data entries in 2 weeks"
+        "Engineered automated voter-data collection to support verification and election strategy",
+        "Built Python scraping pipelines with BeautifulSoup and Requests on 'Cek DPT Online'",
+        "Implemented validation workflows for duplicate detection, cross-referencing, and normalization",
+        "Processed and stored 25,000+ citizen records with approximately 90% faster collection time",
+        "Developed reusable modular scripts to scale retrieval across regions with minimal configuration"
       ]
     },
     {
@@ -134,10 +143,10 @@
       "company": "PT Central Artificial Intelligence",
       "period": "August 2022 - January 2024",
       "focus": [
-        "Interactive dashboard development with Flask",
-        "REST API integration and testing",
-        "Figma mobile prototyping",
-        "Web page implementation based on route requirements"
+        "Delivered responsive dashboard interfaces by translating Figma designs into front-end code",
+        "Integrated and tested RESTful APIs for accurate data flow and reliable communication",
+        "Designed mobile app prototypes in Figma and iterated user flows with stakeholder feedback",
+        "Built and launched landing pages for film and entertainment projects"
       ]
     }
   ],

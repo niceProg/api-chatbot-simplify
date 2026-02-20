@@ -55,6 +55,10 @@ function estimateExperienceYears(experiences = []) {
      return Number((totalMonths / 12).toFixed(1));
 }
 
+function toArray(value) {
+     return Array.isArray(value) ? value : [];
+}
+
 router.post("/chat", async (req, res) => {
      const rawPrompt = req.body?.prompt;
      if (!rawPrompt || typeof rawPrompt !== "string") {
@@ -105,20 +109,34 @@ router.post("/chat", async (req, res) => {
      }
 
      // ========== 2. CONTEXT ke GEMINI ==========
-     const ownerName = profile.identity?.owner_name || "Wisnu Yumna Yudhanta";
-     const ownerRole = profile.identity?.role || "Fullstack Developer";
-     const education = profile.owner_profile?.education || {};
-     const technicalSkills = profile.technical_skills || [];
-     const services = profile.services || [];
-     const projects = profile.projects || [];
+     const identity = profile.identity || {};
+     const ownerName = identity.owner_name || "Wisnu Yumna Yudhanta";
+     const ownerRole = identity.role || "Fullstack Developer";
+     const ownerProfile = profile.owner_profile || {};
+     const education = ownerProfile.education || {};
+     const organizations = toArray(ownerProfile.organizations);
+     const technicalSkills = toArray(profile.technical_skills);
+     const softSkills = toArray(profile.soft_skills);
+     const services = toArray(profile.services);
+     const projects = toArray(profile.projects);
      const contacts = profile.contact || {};
-     const responseDo = profile.response_guidelines?.do || [];
-     const responseDont = profile.response_guidelines?.dont || [];
+     const responseDo = toArray(profile.response_guidelines?.do);
+     const responseDont = toArray(profile.response_guidelines?.dont);
+     const scopePurpose = toArray(profile.chatbot_scope?.purpose);
+     const scopeOutOfScope = toArray(profile.chatbot_scope?.out_of_scope);
+     const qualificationQuestions = toArray(profile.qualification_flow?.ask_in_order);
+     const sampleFaq = toArray(profile.sample_faq);
+     const certifications = toArray(profile.certifications_highlight);
 
      const experienceList =
           experiences.length > 0
                ? experiences
-                      .map((exp) => `- ${exp.title} di ${exp.company} (${exp.period}) | Fokus: ${(exp.focus || []).join(", ")}`)
+                      .map((exp) => {
+                           const focusList = toArray(exp.focus).join(", ");
+                           return `- ${exp.title || "-"} di ${exp.company || "-"} (${exp.period || "-"})${
+                                focusList ? ` | Fokus: ${focusList}` : ""
+                           }`;
+                      })
                       .join("\n")
                : "- Belum ada data pengalaman.";
 
@@ -134,26 +152,73 @@ router.post("/chat", async (req, res) => {
                       .join("\n")
                : "- Belum ada data project.";
 
+     const organizationList =
+          organizations.length > 0
+               ? organizations
+                      .map((org) => {
+                           const highlightList = toArray(org.highlights).join(", ");
+                           return `- ${org.name || "-"} (${org.period || "-"})${highlightList ? ` | Highlights: ${highlightList}` : ""}`;
+                      })
+                      .join("\n")
+               : "- Belum ada data organisasi.";
+
+     const certificationList =
+          certifications.length > 0
+               ? certifications.map((cert) => `- ${cert.title || "-"} (${cert.issuer || "-"}, ${cert.year || "-"})`).join("\n")
+               : "- Belum ada data sertifikasi.";
+
+     const faqList =
+          sampleFaq.length > 0
+               ? sampleFaq.map((item) => `- Q: ${item.q || "-"} | A: ${item.a || "-"}`).join("\n")
+               : "- Belum ada FAQ.";
+
+     const profileJson = JSON.stringify(profile, null, 2);
+
      const context = `
 Kamu adalah ${ownerName}, seorang ${ownerRole}. Ketika seseorang bertanya, jawab dengan gaya profesional, percaya diri, dan personal seolah kamu menjawab langsung sebagai pemilik profil.
 
 Berikut data tentang kamu:
 - Nama: ${ownerName}
 - Role: ${ownerRole}
+- Alias: ${toArray(identity.owner_aliases).join(", ") || "-"}
+- Website: ${identity.website || "-"}
+- Bahasa utama: ${identity.primary_language || "id"}, bahasa kedua: ${identity.secondary_language || "en"}
+- Last updated profile: ${profile.last_updated || "-"}
+- Ringkasan profil: ${ownerProfile.summary || "-"}
 - Pendidikan: ${education.degree || "-"} di ${education.institution || "-"} (${education.graduation_date || "-"})
-- Technical skills: ${technicalSkills.join(", ")}
-- Services: ${services.join(", ")}
+- Technical skills: ${technicalSkills.join(", ") || "-"}
+- Soft skills: ${softSkills.join(", ") || "-"}
+- Services: ${services.join(", ") || "-"}
+
+Tujuan chatbot:
+- Scope utama: ${scopePurpose.join(" | ") || "-"}
+- Di luar scope: ${scopeOutOfScope.join(" | ") || "-"}
 
 Pengalaman kerja:
 ${experienceList}
 
+Organisasi:
+${organizationList}
+
 Beberapa project:
 ${projectList}
 
+Highlight sertifikasi:
+${certificationList}
+
+Urutan pertanyaan kualifikasi lead:
+${qualificationQuestions.join(" | ") || "-"}
+
+Contoh FAQ:
+${faqList}
+
 Panduan jawaban:
-- Yang harus dilakukan: ${responseDo.join(" | ")}
-- Yang harus dihindari: ${responseDont.join(" | ")}
+- Yang harus dilakukan: ${responseDo.join(" | ") || "-"}
+- Yang harus dihindari: ${responseDont.join(" | ") || "-"}
 - Kontak jika user siap lanjut: WhatsApp ${contacts.whatsapp || "-"}, LinkedIn ${contacts.linkedin || "-"}, GitHub ${contacts.github || "-"}
+
+Data profile lengkap (JSON, jadikan ini sumber kebenaran jika ada detail yang belum tercantum di ringkasan):
+${profileJson}
 
 Pertanyaan dari visitor: "${rawPrompt}"
 Jawab sebagai dirimu sendiri dalam bahasa Indonesia (kecuali visitor meminta bahasa lain), ringkas, jelas, dan ajak lanjut ke kontak saat relevan.
