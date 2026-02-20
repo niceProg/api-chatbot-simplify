@@ -35,6 +35,17 @@ jobs:
               exit 1
             fi
             cd "$DEPLOY_PATH"
+            if [ ! -w "$DEPLOY_PATH/.git" ]; then
+              echo "Tidak ada izin tulis ke $DEPLOY_PATH/.git, mencoba perbaiki ownership..."
+              if command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
+                sudo chown -R "$(id -un):$(id -gn)" "$DEPLOY_PATH"
+              else
+                echo "Gagal auto-fix: sudo non-interaktif tidak tersedia."
+                echo "Jalankan manual di server: sudo chown -R $(id -un):$(id -gn) \"$DEPLOY_PATH\""
+                ls -ld "$DEPLOY_PATH" "$DEPLOY_PATH/.git" || true
+                exit 1
+              fi
+            fi
             if ! git config --global --get-all safe.directory | grep -Fxq "$DEPLOY_PATH"; then
               git config --global --add safe.directory "$DEPLOY_PATH"
             fi
