@@ -11,6 +11,9 @@ services:
     environment:
       NODE_ENV: production
       PORT: ${PORT:-5555}
-      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      OPENCODE_API_KEY: ${OPENCODE_API_KEY:-}
+      OPENCODE_BASE_URL: ${OPENCODE_BASE_URL:-https://opencode.ai/zen/v1}
+      OPENCODE_MODEL: ${OPENCODE_MODEL:-gemini-3.7-flash}
+      OPENCODE_MAX_TOKENS: ${OPENCODE_MAX_TOKENS:-1024}
     ports:
       - "${PORT:-5555}:${PORT:-5555}"

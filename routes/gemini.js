@@ -7,6 +7,12 @@ require("dotenv").config();
 
 const PROFILE_PATH = path.resolve(__dirname, "../my-profile.json");
 
+// LLM lewat opencode zen (OpenAI-compatible). Kunci HANYA dari environment,
+// jangan pernah ditulis di source atau dikirim ke frontend.
+const OPENCODE_BASE_URL = process.env.OPENCODE_BASE_URL || "https://opencode.ai/zen/v1";
+const OPENCODE_MODEL = process.env.OPENCODE_MODEL || "gemini-3.7-flash";
+const OPENCODE_MAX_TOKENS = Number(process.env.OPENCODE_MAX_TOKENS || 1024);
+
 function loadProfile() {
      if (!fs.existsSync(PROFILE_PATH)) {
           throw new Error("File profile JSON tidak ditemukan.");
@@ -224,20 +230,36 @@ Pertanyaan dari visitor: "${rawPrompt}"
 Jawab sebagai dirimu sendiri dalam bahasa Indonesia (kecuali visitor meminta bahasa lain), ringkas, jelas, dan ajak lanjut ke kontak saat relevan.
 `;
 
+     if (!process.env.OPENCODE_API_KEY) {
+          return res.status(500).json({ error: "OPENCODE_API_KEY belum diset di environment." });
+     }
+
      try {
           const response = await axios.post(
-               `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+               `${OPENCODE_BASE_URL}/chat/completions`,
                {
-                    contents: [{ parts: [{ text: context }] }],
+                    model: OPENCODE_MODEL,
+                    max_tokens: OPENCODE_MAX_TOKENS,
+                    messages: [{ role: "user", content: context }],
+               },
+               {
+                    headers: {
+                         Authorization: `Bearer ${process.env.OPENCODE_API_KEY}`,
+                         "Content-Type": "application/json",
+                    },
+                    timeout: 60000,
                }
           );
 
-          const reply = response.data.candidates?.[0]?.content?.parts?.[0]?.text || "(no response)";
+          const reply = response.data.choices?.[0]?.message?.content || "(no response)";
           res.json({ reply });
      } catch (err) {
-          res.status(500).json({
-               error: "Gagal mengambil respons Gemini",
-               detail: err.response?.data || err.message,
+          // Jangan pernah bocorkan header/kredensial ke response.
+          const detail = err.response?.data?.error?.message || err.response?.data || err.message;
+          console.error(`[chat] ${OPENCODE_MODEL} gagal:`, detail);
+          res.status(502).json({
+               error: "Gagal mengambil respons dari model.",
+               detail: typeof detail === "string" ? detail : undefined,
           });
      }
 });

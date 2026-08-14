@@ -6,7 +6,7 @@
 cp .env.example .env
 ```
 
-Isi `GEMINI_API_KEY` di `.env`.
+Isi `OPENCODE_API_KEY` di `.env` (lihat `.env.example`).
 
 ## 2. Setup pertama kali
 

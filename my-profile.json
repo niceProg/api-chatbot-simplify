@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "last_updated": "2026-02-20",
+  "version": "2.0.0",
+  "last_updated": "2026-08-15",
   "identity": {
     "assistant_name": "Yumna Portfolio Assistant",
     "owner_name": "Wisnu Yumna Yudhanta",
@@ -10,8 +10,9 @@
       "Yumna",
       "Yudhanta"
     ],
-    "role": "Fullstack Developer",
-    "website": "https://yumnadev.documentme.my.id/",
+    "role": "Full Stack Developer | AI/ML Engineer | Data Engineer",
+    "location": "Central Java, Indonesia (Open to Remote Roles)",
+    "website": "https://portfolio.yum-dev.com/",
     "primary_language": "id",
     "secondary_language": "en"
   },
@@ -19,29 +20,33 @@
     "purpose": [
       "Menjelaskan profil, skill, pengalaman, dan portofolio Wisnu",
       "Membantu visitor memilih project yang relevan dengan kebutuhannya",
-      "Kualifikasi awal calon klien (budget, timeline, fitur inti)",
+      "Kualifikasi awal calon klien atau recruiter (scope, timeline, budget/role)",
       "Mengarahkan visitor ke channel kontak untuk diskusi lanjut"
     ],
     "out_of_scope": [
       "Memberikan janji kontrak/harga final yang mengikat",
       "Memberikan akses data pribadi, kredensial, atau informasi sensitif",
+      "Membocorkan detail internal/rahasia sistem pemerintahan (DPR RI) di luar yang sudah dipublikasikan di CV",
       "Menyampaikan klaim yang tidak ada di data profil"
     ]
   },
   "owner_profile": {
-    "summary": "Experienced Fullstack Developer with the ability to develop applications end-to-end, design engaging UI/UX, and adapt quickly in dynamic environments.",
+    "summary": "Experienced Full Stack Developer and AI/ML Engineer with a strong track record of building end-to-end applications, integrating enterprise systems, and engineering scalable data platforms. Currently lead developer of the Planning/eBudgeting module of ePlanning at the Secretariat General of the Indonesian House of Representatives (DPR RI), owning the full budgeting lifecycle, Keycloak single sign-on, and integrations with six government APIs. Proficient across the full stack — from Laravel and Python/FastAPI backends to Next.js frontends, Kubernetes delivery, and Linux server management.",
     "education": {
-      "degree": "Bachelor's Degree, Informatics Engineering",
+      "degree": "Bachelor of Applied Science, Informatics Engineering",
       "institution": "Politeknik Harapan Bersama",
-      "graduation_date": "2023-08-24"
+      "period": "2019 - 2023",
+      "gpa": "3.22 / 4.00",
+      "location": "Central Java, Indonesia"
     },
     "organizations": [
       {
-        "name": "TEGAL DEV",
+        "name": "Tegal Dev Community",
+        "role": "Event Organizer & Tech Host",
         "period": "2024 - Present",
         "highlights": [
-          "Organized community meetups and scheduled tech events",
-          "Hosted workshops and MC-ed tech talks on Discord"
+          "Initiated and organized technical workshops on Flutter, Gemini AI, and Generative AI web apps",
+          "Hosted regular Tech Talk sessions on Discord, sharing industry insights, trends, and best practices"
         ]
       },
       {
@@ -56,173 +61,296 @@
     ]
   },
   "services": [
-    "Fullstack web app development",
+    "Full stack web app development (Laravel, Next.js, FastAPI)",
+    "Enterprise system integration and third-party/government API integration",
+    "Identity & access management (Keycloak, OpenID Connect, RBAC)",
     "Landing page and company profile website",
     "UI/UX redesign and front-end implementation",
     "Payment gateway integration (example: Midtrans)",
-    "Automation and data scraping workflows",
-    "Server setup and deployment (aaPanel, WHCP, cPanel, VPS)"
+    "AI/ML engineering: RAG chatbots, XGBoost time-series modeling",
+    "Data pipeline, web scraping, and ETL automation",
+    "DevOps: Docker, Kubernetes, Helm, GitLab CI/CD, server setup (aaPanel, WHCP, VPS)"
   ],
-  "technical_skills": [
-    "Python",
-    "PHP",
-    "JavaScript",
-    "Laravel",
-    "Flask",
-    "Django",
-    "FastAPI",
-    "XGBoost",
-    "QuantConnect",
-    "Flutter",
-    "Docker",
-    "MySQL",
-    "MongoDB",
-    "Redis",
-    "Tailwind CSS",
-    "Bootstrap 5",
-    "Git",
-    "CI/CD",
-    "Postman",
-    "TensorFlow",
-    "OpenCV",
-    "Face Recognition",
-    "Selenium",
-    "Linux Server Terminal",
-    "Figma"
-  ],
-  "soft_skills": [
-    "Analytical thinking",
-    "Problem solving",
-    "Communication",
-    "Team collaboration",
-    "Adaptability"
+  "technical_skills": {
+    "languages": [
+      "PHP (Laravel)",
+      "Python (FastAPI / Flask)",
+      "TypeScript",
+      "JavaScript",
+      "SQL",
+      "Bash/Shell"
+    ],
+    "frontend": [
+      "Next.js",
+      "Blade",
+      "TailwindCSS",
+      "Vite",
+      "AngularJS",
+      "HTML5",
+      "CSS3",
+      "Flutter",
+      "DataTables",
+      "CKEditor"
+    ],
+    "backend_database": [
+      "Laravel (modular monolith, Eloquent multi-database)",
+      "FastAPI",
+      "RESTful API design & provisioning",
+      "MySQL / MariaDB",
+      "PostgreSQL",
+      "Redis",
+      "NoSQL"
+    ],
+    "auth_security": [
+      "Keycloak",
+      "OpenID Connect (Authorization Code + PKCE)",
+      "JWT / JWKS",
+      "spatie/laravel-permission",
+      "RBAC",
+      "API-key authentication",
+      "Audit logging",
+      "CVE & Checkmarx remediation"
+    ],
+    "ai_ml": [
+      "XGBoost",
+      "Time-Series Modeling",
+      "RAG (Retrieval Augmented Generation)",
+      "Prompt Engineering",
+      "QuantConnect"
+    ],
+    "data_engineering": [
+      "Data Pipeline Design",
+      "Web Scraping",
+      "Feature Engineering",
+      "ETL & Snapshot Sync",
+      "De-duplication Strategies"
+    ],
+    "devops_cloud": [
+      "Docker",
+      "Kubernetes (Deployment + CronJob)",
+      "Helm",
+      "Kaniko",
+      "GitLab CI/CD",
+      "GCP",
+      "Azure",
+      "DigitalOcean",
+      "Linux Server (aaPanel / WHCP)",
+      "Nginx",
+      "Prometheus",
+      "Grafana"
+    ],
+    "practices_tools": [
+      "TDD / PHPUnit",
+      "Code Review",
+      "Technical Spec & Design Docs",
+      "Git / GitHub / GitLab",
+      "Figma (UI/UX, Prototyping)",
+      "Postman",
+      "Microsoft Excel"
+    ]
+  },
+  "core_competencies": [
+    "Full Stack Development",
+    "Enterprise Systems Integration",
+    "Identity & Access Management",
+    "AI/ML Engineering",
+    "Data Pipeline Architecture",
+    "DevOps & Automation",
+    "Test-Driven Development",
+    "UI/UX Design",
+    "Team Collaboration",
+    "Problem Solving",
+    "Agile Development"
   ],
   "experience": [
     {
-      "title": "AI/ML Engineer (Crypto Analytics)",
-      "company": "Dragonfortune.ai Surabaya",
-      "period": "August 2025 - Present",
+      "title": "Full Stack Developer",
+      "company": "Sekretariat Jenderal DPR RI",
+      "location": "Jakarta · Hybrid",
+      "period": "April 2026 - Present",
       "focus": [
-        "Crypto data scraping pipelines (Coinglass, CryptoQuant, Hyblock, TensorCharts)",
-        "Linux server provisioning with WHCP and aaPanel",
-        "End-to-end AI-powered trading platform delivery",
-        "Automated ingestion, scraping, cleaning, and feature pipelines",
-        "Docker automation with shell scripting",
-        "XGBoost signal modeling for financial time-series",
-        "Iterative XGBoost experimentation and backtest optimization",
-        "Python FastAPI services for training and inference",
-        "Laravel dashboard, user management, and strategy configuration",
-        "QuantConnect backtesting and Dockerized CI/CD deployment"
+        "Solo developer of the eBudgeting module of ePlanning, a Laravel 12 modular monolith with 4 modules and 4 separate MySQL databases",
+        "8-level budget structure tree with lazy-loaded work-tree UI, search, and bulk expand/collapse",
+        "5-stage approval pipeline with state transitions, cascading approvals, and ceiling-enforcing server-side validation",
+        "Integration of 6 internal government APIs using a pull → snapshot → local-filter pattern with SHA-256 fingerprint de-duplication",
+        "Authentication migration from shared sessions to pure OIDC on Keycloak (Authorization Code + PKCE S256, JWKS RS256, reactive token refresh, back-channel logout)",
+        "In-app Keycloak RBAC administration: 24-role catalog, email-based HR/IdP reconciliation, role assignment with audit trail",
+        "Read-only provider API secured by hashed DB-backed API keys with per-request audit logging and self-service key management",
+        "Budget realization reporting with 7-level drill-down, roll-up subtotals, and styled PDF (mPDF) / XLSX exports",
+        "Kubernetes CronJobs for data ingestion, plus GitLab CI → Kaniko → Helm → Kubernetes delivery",
+        "89 test files (TDD for pure logic, HTTP fakes for integrations) and heavy-page latency optimization via SQL aggregation and caching",
+        "Security remediation including CVE-2022-50897 in mPDF, output escaping, and hardcoded credential removal"
       ]
     },
     {
-      "title": "Internship Fullstack Engineer",
-      "company": "DOKTORTJ DIGITAL INSTITUTE",
-      "period": "November 2024 - January 2025",
+      "title": "AI/ML Engineer",
+      "company": "Dragonfortune.ai",
+      "location": "Surabaya, East Java · Contract · Remote",
+      "period": "January 2026 - May 2026",
       "focus": [
-        "Led end-to-end delivery of two business-facing websites and one customer-facing platform",
-        "Built secure platform architecture with RESTful APIs, MySQL design, and role-based access control",
-        "Aligned technical execution with business goals through close stakeholder and PM collaboration",
-        "Delivered projects on schedule with a focus on UX and operational efficiency"
+        "Crypto data scraping pipelines across Coinglass, CryptoQuant, Hyblock, and TensorCharts",
+        "Automated pipelines for ingestion, scraping, cleaning, and feature engineering from exchange APIs",
+        "XGBoost models on financial time-series data for predictive trading signals",
+        "Python and FastAPI services for model training, inference, and REST API integration",
+        "Strategy backtesting and validation on QuantConnect (accuracy, drawdown, profitability)",
+        "Shell scripts automating Docker-based scraping jobs and operational workflows",
+        "Linux server provisioning with WHCP and aaPanel",
+        "Dockerized Linux/VPS deployments and CI/CD workflows"
+      ]
+    },
+    {
+      "title": "Full Stack Developer",
+      "company": "Dragonfortune.ai",
+      "location": "Surabaya, East Java · Contract · Remote",
+      "period": "August 2025 - January 2026",
+      "focus": [
+        "Multi-navigation crypto market intelligence dashboard covering Derivatives Core, Spot Microstructure, On-Chain Metrics, ETF & Institutional, Volatility & Regime, Macro Overlay, and Sentiment & Flow",
+        "Cross-functional collaboration with product, data, and engineering to scope and deliver modules incrementally",
+        "Feature pages: Funding Rate, Open Interest, Long/Short Ratio, Liquidation Heatmap, Liquidation Order Stream, Aggregated Liquidations, Basis & Term Structure",
+        "End-to-end frontend and backend with Laravel, REST APIs, and SQL databases",
+        "Reusable UI components and interactive chart/table views",
+        "Structured GitHub workflow with branching, PRs, and code reviews"
+      ]
+    },
+    {
+      "title": "Full Stack Engineer",
+      "company": "DOKTORTJ Digital Institute",
+      "location": "Tegal, Central Java · Internship · On-site",
+      "period": "November 2024 - February 2025",
+      "focus": [
+        "Led end-to-end development of two business websites and one client platform",
+        "Backend architecture with RESTful API integration, MySQL design, and Role-Based Access Control",
+        "Figma designs transformed into responsive, high-performance dashboard interfaces",
+        "Mobile app mockups in Figma implemented as Android apps with Flutter",
+        "Technical instructor for Scratch Programming, Flutter (Intermediate), and Web Programming"
       ]
     },
     {
       "title": "Data Engineer",
-      "company": "Golkar DKI",
+      "company": "DPD Partai Golkar Kota Jakarta Pusat",
+      "location": "Jakarta · Part-time · On-site",
       "period": "December 2023 - May 2024",
       "focus": [
-        "Engineered automated voter-data collection to support verification and election strategy",
-        "Built Python scraping pipelines with BeautifulSoup and Requests on 'Cek DPT Online'",
-        "Implemented validation workflows for duplicate detection, cross-referencing, and normalization",
-        "Processed and stored 25,000+ citizen records with approximately 90% faster collection time",
-        "Developed reusable modular scripts to scale retrieval across regions with minimal configuration"
+        "Managed data entry systems with accurate processing and retrieval",
+        "Python web scraping of population data from the 'Cek DPT Online' platform",
+        "Data validation with duplicate filters, producing clean datasets and Excel bar chart reports",
+        "VPS automation scripts to reduce human error on large-scale datasets",
+        "Collected and compiled 25,000+ data entries within 2 weeks"
       ]
     },
     {
-      "title": "Fullstack Developer",
-      "company": "PT Central Artificial Intelligence",
-      "period": "August 2022 - January 2024",
+      "title": "Full Stack Developer",
+      "company": "Politeknik Purbaya",
+      "location": "Slawi, Central Java · Freelance · Hybrid",
+      "period": "May 2023 - August 2023",
       "focus": [
-        "Delivered responsive dashboard interfaces by translating Figma designs into front-end code",
-        "Integrated and tested RESTful APIs for accurate data flow and reliable communication",
-        "Designed mobile app prototypes in Figma and iterated user flows with stakeholder feedback",
-        "Built and launched landing pages for film and entertainment projects"
+        "End-to-end web application development and maintenance, including new features and performance improvements",
+        "Robust authentication and authorization systems",
+        "Efficient data management systems using Flask with integrated ML components"
+      ]
+    },
+    {
+      "title": "Full Stack Developer",
+      "company": "PT. Central Artificial Intelligence",
+      "location": "Jakarta · Contract · Remote",
+      "period": "August 2022 - January 2023",
+      "focus": [
+        "Interactive web dashboards built from Figma designs",
+        "REST API integration and testing for frontend/backend synchronization",
+        "Mobile application prototypes in Figma",
+        "Web pages with film routing logic implemented in Flask",
+        "CI/CD pipelines with automated testing frameworks"
       ]
     }
   ],
   "projects": [
     {
-      "name": "Chatbot with RAG",
+      "name": "ePlanning / eBudgeting Platform — DPR RI",
+      "year": "2026 - Present",
+      "stack": [
+        "Laravel 12",
+        "PHP 8.2",
+        "nwidart/laravel-modules",
+        "MySQL (multi-database)",
+        "Redis",
+        "Keycloak/OIDC",
+        "Tailwind CSS v4",
+        "Vite",
+        "Yajra DataTables",
+        "mPDF",
+        "maatwebsite/excel",
+        "Docker",
+        "GitLab CI",
+        "Kaniko",
+        "Helm",
+        "Kubernetes"
+      ],
+      "url": null,
+      "summary": "National-scale budget planning and realization platform for the Indonesian House of Representatives: 8-level budget structure, 5-stage approval workflow, cash planning (SICAPING), realization reporting with 7-level drill-down, Keycloak SSO with in-app RBAC administration, and a secured provider API for other government systems."
+    },
+    {
+      "name": "Chatbot with Retrieval Augmented Generation (RAG)",
       "year": "2025",
       "stack": [
         "Next.js",
         "FastAPI",
-        "IBM Granite",
-        "Replicate API",
-        "Google OAuth"
+        "IBM Granite (Replicate API)",
+        "Tailwind CSS",
+        "Google OAuth",
+        "DigitalOcean",
+        "Nginx",
+        "Prometheus",
+        "Grafana"
       ],
       "url": "https://ibmskills.documentme.my.id/",
-      "summary": "AI chatbot with Retrieval Augmented Generation and responsive dashboard."
+      "summary": "Web-based AI chatbot giving personalized answers from user-uploaded documents, with Google OAuth login, responsive dashboard, and VPS deployment monitored via Prometheus and Grafana."
+    },
+    {
+      "name": "Crypto Market Intelligence Dashboard",
+      "year": "2025 - 2026",
+      "stack": ["Laravel", "REST APIs", "MySQL", "JavaScript", "GitHub"],
+      "url": null,
+      "summary": "Multi-module analytics dashboard covering derivatives, spot microstructure, on-chain metrics, ETF/institutional flow, volatility regime, macro overlay, and sentiment analysis with real-time and historical data."
     },
     {
       "name": "Web Movie Explorer",
       "year": "2025",
-      "stack": [
-        "Laravel 5.8",
-        "OMDb API",
-        "Tailwind CSS"
-      ],
+      "stack": ["Laravel 5.8", "OMDb API", "Tailwind CSS"],
       "url": "https://movie.documentme.my.id",
       "summary": "Movie discovery platform by genre and year."
     },
     {
       "name": "Rental PS Booking System",
       "year": "2025",
-      "stack": [
-        "Laravel",
-        "Midtrans"
-      ],
+      "stack": ["Laravel", "Midtrans"],
       "url": null,
       "summary": "PlayStation rental app with online booking and payment integration."
     },
     {
       "name": "SALUT DOKTORTJ Website",
       "year": "2025",
-      "stack": [
-        "Laravel"
-      ],
+      "stack": ["Laravel"],
       "url": null,
       "summary": "Educational service website for digitalization support."
     },
     {
-      "name": "Personal Blog",
+      "name": "TechNova Blog Platform",
       "year": "2024",
-      "stack": [
-        "Next.js",
-        "TypeScript",
-        "Sanity CMS"
-      ],
+      "stack": ["Next.js", "TypeScript", "TailwindCSS", "Sanity CMS", "Valtio"],
       "url": "https://blog-yumna-155nrjch7-wisnu-yumna-yudhantas-projects.vercel.app",
-      "summary": "Personal blog with structured content management."
+      "summary": "Modern technical blogging platform with server-side rendering, Sanity CMS content management, dark mode, and responsive design."
     },
     {
       "name": "Duplicate Sentence and Document Detector",
       "year": "2024",
-      "stack": [
-        "Django",
-        "Sastrawi"
-      ],
+      "stack": ["Django", "Sastrawi"],
       "url": null,
       "summary": "Similarity detection app with automatic source references."
     },
     {
       "name": "Employee Attendance Application",
       "year": "2023",
-      "stack": [
-        "Face Recognition",
-        "GPS",
-        "Reporting Dashboard"
-      ],
+      "stack": ["Face Recognition", "GPS", "Reporting Dashboard"],
       "url": null,
       "summary": "Digital attendance app with exportable reports."
     }
@@ -230,7 +358,7 @@
   "certifications_highlight": [
     {
       "title": "Code Generation and Optimization Using IBM Granite",
-      "issuer": "Creadly",
+      "issuer": "IBM · Hacktiv8 x IBM SkillsBuild",
       "year": "2025"
     },
     {
@@ -245,6 +373,8 @@
     }
   ],
   "contact": {
+    "email": "wisnu.yudhanta@gmail.com",
+    "phone": "(+62) 856-0067-0534",
     "whatsapp": "https://wa.me/6285600670534",
     "github": "https://github.com/niceProg",
     "linkedin": "https://www.linkedin.com/in/wisnu-yumna-yudhanta-143596199/",
@@ -290,8 +420,16 @@
       "a": "Bisa. Contoh yang pernah dikerjakan: Midtrans integration pada sistem booking."
     },
     {
+      "q": "Bisa handle SSO / login terpusat?",
+      "a": "Bisa. Wisnu mengerjakan migrasi autentikasi ke Keycloak dengan OpenID Connect (Authorization Code + PKCE), verifikasi JWKS, token refresh, dan back-channel logout di sistem eBudgeting DPR RI."
+    },
+    {
+      "q": "Pengalaman skala enterprise ada?",
+      "a": "Ada. Saat ini Wisnu jadi lead developer modul eBudgeting ePlanning di Sekretariat Jenderal DPR RI: Laravel 12 modular monolith, 4 database MySQL terpisah, integrasi 6 API pemerintah, dan delivery lewat GitLab CI → Kaniko → Helm → Kubernetes."
+    },
+    {
       "q": "Tech stack yang sering dipakai apa?",
-      "a": "Umumnya Python/PHP/JavaScript dengan framework seperti Laravel, Flask, Django, FastAPI, serta front-end Tailwind/Bootstrap."
+      "a": "Umumnya PHP/Laravel dan Python (FastAPI/Flask) di backend, Next.js/Blade + Tailwind di frontend, MySQL/PostgreSQL/Redis untuk data, serta Docker & Kubernetes untuk deployment."
     }
   ]
 }
