@@ -12,6 +12,7 @@ const PROFILE_PATH = path.resolve(__dirname, "../my-profile.json");
 const OPENCODE_BASE_URL = process.env.OPENCODE_BASE_URL || "https://opencode.ai/zen/v1";
 const OPENCODE_MODEL = process.env.OPENCODE_MODEL || "gemini-3.7-flash";
 const OPENCODE_MAX_TOKENS = Number(process.env.OPENCODE_MAX_TOKENS || 1024);
+const MAX_PROMPT_LENGTH = Number(process.env.MAX_PROMPT_LENGTH || 1000);
 
 function loadProfile() {
      if (!fs.existsSync(PROFILE_PATH)) {
@@ -69,6 +70,13 @@ router.post("/chat", async (req, res) => {
      const rawPrompt = req.body?.prompt;
      if (!rawPrompt || typeof rawPrompt !== "string") {
           return res.status(400).json({ error: "Field `prompt` wajib diisi dan harus berupa string." });
+     }
+
+     // Batasi panjang prompt supaya biaya per request tidak bisa dibengkakkan.
+     if (rawPrompt.length > MAX_PROMPT_LENGTH) {
+          return res.status(413).json({
+               error: `Pertanyaan terlalu panjang (maksimal ${MAX_PROMPT_LENGTH} karakter).`,
+          });
      }
 
      const userPrompt = rawPrompt.toLowerCase(); // lowercase untuk memudahkan pencocokan
